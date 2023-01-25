@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53905974-6e87-4628-8d86-4d4bf1812e22" name="Changes" comment="add class 'Employee' with CRUD methods">
+    <list default="true" id="53905974-6e87-4628-8d86-4d4bf1812e22" name="Changes" comment=".gitignore update">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -134,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674582911111</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary=".gitignore update">
+      <created>1674667257145</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1674667257145</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -144,6 +152,7 @@
     <MESSAGE value="add mysql-connector-java dependencies" />
     <MESSAGE value="add a datebase connection" />
     <MESSAGE value="add class 'Employee' with CRUD methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="add class 'Employee' with CRUD methods" />
+    <MESSAGE value=".gitignore update" />
+    <option name="LAST_COMMIT_MESSAGE" value=".gitignore update" />
   </component>
 </project>

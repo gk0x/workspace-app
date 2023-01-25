@@ -3,7 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-.idea/workspace.xml
+
 
 
 ### IntelliJ IDEA ###
@@ -39,3 +39,5 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/.idea/jpa-buddy.xml
+/.idea/workspace.xml
