@@ -1,5 +1,8 @@
 package org.example.models;
 
+import com.mysql.cj.jdbc.DatabaseMetaData;
+
+import javax.sql.DataSource;
 import java.sql.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -68,8 +71,31 @@ public class TimeWork {
         }
         return timeWork;
     }
+    public void insertTimeWork(int employeeId, LocalDateTime loginTime, LocalDateTime logoutTime, int projectId) {
 
 
-}
+        String sql = "INSERT INTO czas_pracy (id_pracownika, data_zalogowania, data_wylogowania, id_projektu, czas) VALUES (?,?,?,?,?)";
+        DataSource dataSource=null;
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement statement = conn.prepareStatement(sql)) {
+            Duration durationBetweenLoginLogout = Duration.between(loginTime, logoutTime);
+            long minutes = durationBetweenLoginLogout.toMinutes();
+            statement.setInt(1, employeeId);
+            statement.setObject(2, loginTime);
+            statement.setObject(3, logoutTime);
+            statement.setInt(4, projectId);
+            statement.setLong(5, minutes);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    }
+
+
+
 
 
