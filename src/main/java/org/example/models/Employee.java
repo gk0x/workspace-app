@@ -10,6 +10,12 @@ public class Employee {
 
     public Employee() {}
 
+    public Employee(String firstName, String lastName, int roleId) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.roleId = roleId;
+    }
+
     public Employee(int id, String firstName, String lastName, int roleId) {
         this.id = id;
         this.firstName = firstName;
@@ -26,6 +32,16 @@ public class Employee {
     public void setLastName(String lastName) { this.lastName = lastName; }
     public int getRoleId() { return roleId; }
     public void setRoleId(int roleId) { this.roleId = roleId; }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", roleId=" + roleId +
+                '}';
+    }
 
     //metoda dodawania pracownika do bazy danych
     public void addEmployee(Connection con) {
