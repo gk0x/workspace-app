@@ -50,32 +50,10 @@ public class TimeWork {
         }
     }
 
-    public TimeWork getTimeWork(Connection con, int id) {
-        TimeWork timeWork = null;
-        try {
-            String sql = "SELECT * FROM czas_pracy WHERE id = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                int employeeId = rs.getInt("id_pracownika");
-                LocalDateTime loginTime = rs.getTimestamp("data_zalogowania").toLocalDateTime();
-                LocalDateTime logoutTime = rs.getTimestamp("data_wylogowania").toLocalDateTime();
-                int projectId = rs.getInt("id_projektu");
-
-                Duration durationBetweenLoginLogout = Duration.between(loginTime, logoutTime);
-                long seconds = durationBetweenLoginLogout.getSeconds();
-                LocalTime workingTime = LocalTime.ofSecondOfDay(seconds);
-                timeWork = new TimeWork(id, employeeId, loginTime, logoutTime, projectId, workingTime);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return timeWork;
-    }
 
 
-        public void insertTimeWork(Connection con, int employeeId, LocalDate date, LocalTime loginTime, LocalTime logoutTime, int projectId) {
+
+        public void insertDailyTimeWork(Connection con, int employeeId, LocalDate date, LocalTime loginTime, LocalTime logoutTime, int projectId) {
             PreparedStatement ps = null;
             try {
                 String query = "INSERT INTO czas_pracy (id_pracownika, data_zalogowania, data_wylogowania, id_projektu, czas) VALUES (?,?,?,?,?)";
@@ -130,7 +108,7 @@ public class TimeWork {
                 }
             }
         }
-    public void insertTotalTimeWork(Connection con, int employeeId, int projectId) {
+    public void insertTotalTimeWorkForProject(Connection con, int employeeId, int projectId) {
         PreparedStatement ps = null;
         try {
             String query = "SELECT SUM(czas) FROM czas_pracy WHERE id_pracownika = ? AND id_projektu = ?";
@@ -154,8 +132,63 @@ public class TimeWork {
             }
         }
     }
-
+    public LocalTime getDailyTimeWork(Connection con, int employeeId, LocalDate date) {
+        LocalTime dailyWorkTime = LocalTime.of(0, 0); // initialize to zero
+        try {
+            String query = "SELECT SUM(czas) FROM czas_pracy WHERE id_pracownika = ? AND data_zalogowania >= ? AND data_zalogowania < ?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, employeeId);
+            ps.setDate(2, Date.valueOf(date));
+            ps.setDate(3, Date.valueOf(date.plusDays(1)));
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int timeInMinutes = rs.getInt(1);
+                dailyWorkTime = LocalTime.ofSecondOfDay(timeInMinutes * 60);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dailyWorkTime;
     }
+    public LocalTime getMonthlyTimeWork(Connection con, int employeeId, int month, int year) {
+        PreparedStatement ps = null;
+        LocalTime totalMonthlyWorkTime = null;
+        try {
+            String query = "SELECT SUM(czas) FROM czas_pracy WHERE id_pracownika = ? AND MONTH(data_zalogowania) = ? AND YEAR(data_zalogowania) = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, employeeId);
+            ps.setInt(2, month);
+            ps.setInt(3, year);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                long minutes = rs.getLong("SUM(czas)");
+                totalMonthlyWorkTime = LocalTime.ofSecondOfDay(minutes * 60);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalMonthlyWorkTime;
+    }
+
+    public LocalTime getTotalTimeWorkForProject(Connection con, int projectId) {
+        PreparedStatement ps = null;
+        LocalTime totalProjectWorkTime = null;
+        try {
+            String query = "SELECT SUM(czas) FROM czas_pracy WHERE id_projektu = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, projectId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                long minutes = rs.getLong("SUM(czas)");
+                totalProjectWorkTime = LocalTime.ofSecondOfDay(minutes * 60);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalProjectWorkTime;
+    }
+
+}
 
 
 
