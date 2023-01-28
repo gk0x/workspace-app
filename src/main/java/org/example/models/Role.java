@@ -31,6 +31,14 @@ public class Role {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public void addRole(Connection con){
         PreparedStatement ps = null;
         try {
@@ -79,7 +87,7 @@ public class Role {
             }
         }return role;
     }
-public void UpdateRole(Connection con, int id, String name){
+public void updateRole(Connection con, int id, String name){
         PreparedStatement ps = null;
         try {
             String query = "UPDATE rola SET nazwa = ? WHERE id = ?";
@@ -102,7 +110,7 @@ public void UpdateRole(Connection con, int id, String name){
 public void deleteRole(Connection con, int id){
         PreparedStatement ps = null;
         try {
-            String query = "DELETE FROM projekty WHERE id = ?";
+            String query = "DELETE FROM rola WHERE id = ?";
             ps = con.prepareStatement(query);
             ps.setInt(1,id);
             ps.executeUpdate();

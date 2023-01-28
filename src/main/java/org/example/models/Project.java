@@ -1,5 +1,7 @@
 package org.example.models;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
+
 import java.sql.*;
 
 public class Project {
@@ -14,7 +16,7 @@ public class Project {
     public Project() {
     }
 
-    public Project(int id, String name, String description, Date startDate, Date deadline, String status, int managerId) {
+    public Project(int id, String name, String description, Date startDate, Date deadline,int managerId, String status) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -23,11 +25,42 @@ public class Project {
         this.status = status;
         this.managerId = managerId;
     }
+
+    public Project(String name, String description, Date startDate, Date deadline,int managerId, String status) {
+        this.name = name;
+        this.description = description;
+        this.startDate = startDate;
+        this.deadline = deadline;
+        this.status = status;
+        this.managerId = managerId;
+    }
+
     public Project(int id, String name, String description, int managerId) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.managerId = managerId;
+    }
+
+    public Project(int id) {
+        this.id = id;
+    }
+
+    public Project(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", startDate=" + startDate +
+                ", deadline=" + deadline +
+                ", status='" + status + '\'' +
+                ", managerId=" + managerId +
+                '}';
     }
 
     //gettery i settery
@@ -120,7 +153,7 @@ public class Project {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
-                project = new Project(rs.getInt("id"), rs.getString("nazwa"), rs.getString("opis"), rs.getInt("id_menadzera_projektu"));
+                project = new Project(rs.getInt("id"), rs.getString("nazwa"), rs.getString("opis"), rs.getDate("data_rozpoczecia"), rs.getDate("deadline"),rs.getInt("id_menadzera_projektu"), rs.getString("status"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -138,15 +171,18 @@ public class Project {
         }
         return project;
     }
-    public void updateProject(Connection con, int id, String name, String description, int managerId) {
+    public void updateProject(Connection con, int id, String name, String description, Date startDate, Date deadline, int managerId, String status) {
         PreparedStatement ps = null;
         try {
-            String query = "UPDATE projekty SET nazwa = ?, opis = ?, id_menadzera_projektu = ? WHERE id = ?";
+            String query = "UPDATE projekty SET nazwa = ?, opis = ?,data_rozpoczecia = ?, deadline = ?, id_menadzera_projektu = ?, status = ? WHERE id = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, name);
             ps.setString(2, description);
-            ps.setInt(3, managerId);
-            ps.setInt(4, id);
+            ps.setDate(3,startDate);
+            ps.setDate(4,deadline);
+            ps.setInt(5, managerId);
+            ps.setString(6, status);
+            ps.setInt(7,id);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
