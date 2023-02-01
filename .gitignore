@@ -42,3 +42,4 @@ build/
 /.idea/jpa-buddy.xml
 /.idea/workspace.xml
 
+/src/main/resources/views/images/login.jpg
