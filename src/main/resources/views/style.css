@@ -1,6 +1,7 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
+  background-color: #f4cee7;
+  font-family: Trebuchet MS, sans-serif;;
+  
 }
 
 .form-container {
@@ -12,8 +13,8 @@ body {
   margin: 100px auto;
 }
 h1 {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: #090909;
+    font-family: Trebuchet MS, sans-serif;;
+    color: #3e8e41;
     background-color: #f2f2f2;
     text-align: center;
 }
@@ -71,3 +72,83 @@ input[type="submit"]:hover {
   color: #3e8e41;
   text-align: center;
 }
+.menu {
+    background-color: #2d2d2d;
+  }
+  nav ul li a {
+    font-family: Trebuchet MS, sans-serif;
+  }
+  
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  li a:hover {
+    background-color: #4CAF50;
+  }
+  nav.menu {
+    border: 6px solid #4CAF50;
+    border-radius: 20px;
+  }
+  .profile {
+    display: none;
+  }
+  
+  .profile.show {
+    display: block;
+  }
+  
+  .profile-section {
+    margin-top: 20px;
+  }
+  
+  .profile-section h3 {
+    margin: 0;
+  }
+  
+  .profile-details p {
+    margin: 0;
+  }
+  
+  .profile-details img {
+    max-width: 100%;
+  }
+  .profile-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .sections {
+    width: 50%;
+  }
+  
+  #user-info {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  
+  
+  
