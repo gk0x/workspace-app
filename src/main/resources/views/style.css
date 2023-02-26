@@ -1,6 +1,6 @@
 body {
-  background-color: #f4cee7;
-  font-family: Trebuchet MS, sans-serif;;
+  background-color: #ffffff(0, 0%, 98%);
+  font-family: 'Andika New Basic', serif sans-serif;
   
 }
 
@@ -13,7 +13,7 @@ body {
   margin: 100px auto;
 }
 h1 {
-    font-family: Trebuchet MS, sans-serif;;
+    font-family: 'Andika New Basic', sans-serif;
     color: #3e8e41;
     background-color: #f2f2f2;
     text-align: center;
@@ -73,40 +73,45 @@ input[type="submit"]:hover {
   text-align: center;
 }
 .menu {
-    background-color: #2d2d2d;
-  }
-  nav ul li a {
-    font-family: Trebuchet MS, sans-serif;
-  }
-  
+  height: 45px;
+  justify-content: space-between;
+  background-color: #2d2d2d;
+  border: 8px solid #4CAF50;
+  border-radius: 20px;
+}
 
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
+.menu ul {
   
-  li {
-    float: left;
-  }
-  
-  li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  li a:hover {
-    background-color: #4CAF50;
-  }
-  nav.menu {
-    border: 6px solid #4CAF50;
-    border-radius: 20px;
-  }
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.menu li {
+  float: left;
+  font-size:large;
+}
+
+.menu li.right {
+  float: right;
+}
+
+.menu li a {
+  align-items: center;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.menu li a:hover {
+  background-color: #4CAF50;
+}
+
+    
   .profile {
     display: none;
   }
@@ -147,6 +152,7 @@ input[type="submit"]:hover {
     justify-content: center;
     align-items: center;
   }
+  
   
   
   
