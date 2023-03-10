@@ -12,11 +12,12 @@ if(isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["email"]) &
     $email = $_POST["email"];
     $password = $_POST["password"];
     $password2 = $_POST["password2"];
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     if(!empty($name) && !empty($surname) && !empty($role_id) && !empty($email) && !empty($password) && !empty($password2)) {
         if (strlen($password) >= 8) {
             if($password == $password2) {
-                $sql = "INSERT INTO pracownicy (imie, nazwisko, rola_id, email, haslo) VALUES ('$name', '$surname', '$role_id', '$email', '$password')";
+                $sql = "INSERT INTO pracownicy (imie, nazwisko, rola_id, email, haslo) VALUES ('$name', '$surname', '$role_id', '$email', '$hashed_password')";
                 // uzytkownik dodany do bzy
                 if (mysqli_query($conn, $sql)) {
                    $last_id = mysqli_insert_id($conn);
@@ -39,9 +40,10 @@ mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="pl">
   <head>
-    <link rel="stylesheet" type="text/css" href="style1.css">
+  <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style5.css">
     <title>Rejestracja</title>
   </head>
   <body>
